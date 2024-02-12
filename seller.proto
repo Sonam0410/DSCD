@@ -1,0 +1,17 @@
+// seller.proto
+
+syntax = "proto3";
+
+package seller;
+
+service Seller {
+  rpc SendNotification(SendNotificationRequest) returns (SendNotificationResponse);
+}
+
+message SendNotificationRequest {
+  string message = 1;
+}
+
+message SendNotificationResponse {
+  bool success = 1;
+}

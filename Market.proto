@@ -1,0 +1,96 @@
+// market.proto
+
+syntax = "proto3";
+
+package market;
+
+service Market {
+  rpc RegisterSeller(RegisterSellerRequest) returns (RegisterSellerResponse);
+  rpc AddProduct(AddProductRequest) returns (AddProductResponse);
+  rpc UpdateProduct(UpdateProductRequest) returns (UpdateProductResponse);
+  rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
+  rpc SearchProducts(SearchProductsRequest) returns (SearchProductsResponse);
+  rpc PurchaseProduct(PurchaseProductRequest) returns (PurchaseProductResponse);
+  rpc WishlistProduct(WishlistProductRequest) returns (WishlistProductResponse);
+}
+
+message RegisterSellerRequest {
+  string sellerId = 1;
+  string address = 2;
+}
+
+message RegisterSellerResponse {
+  bool success = 1;
+}
+
+message AddProductRequest {
+  string sellerId = 1;
+  string productId = 2;
+  string productName = 3;
+  string Category =4 ;
+  string Quantity =5;
+  float price = 6;
+}
+
+message AddProductResponse {
+  bool success = 1;
+}
+
+message UpdateProductRequest {
+  string productId = 1;
+  string productName = 2;
+  string Quantity =5;
+  string seller_address =6;
+  float price = 7;
+}
+
+message UpdateProductResponse {
+  bool success = 1;
+}
+
+message DeleteProductRequest {
+  string productId = 1;
+  string seller_address =2;
+}
+
+message DeleteProductResponse {
+  bool success = 1;
+}
+
+message SearchProductsRequest {
+  string query = 1;
+}
+
+message SearchProductsResponse {
+  repeated Product products = 1;
+
+  message Product {
+    string itemId = 1;
+    string productName = 2;
+    string category = 3;
+    int32 quantityRemaining = 4;
+    string description = 5;
+    string sellerAddress = 6;
+    float price = 7;
+    float rating = 8;
+  }
+}
+
+
+message PurchaseProductRequest {
+  string itemId = 1;
+  string buyerAddress = 2;
+  string buyerUuid = 3;
+}
+
+message PurchaseProductResponse {
+  bool success = 1;
+}
+message WishlistProductRequest {
+  string buyerId = 1;
+  string Buyer_address = 2;
+}
+
+message WishlistProductResponse {
+  bool success = 1;
+}

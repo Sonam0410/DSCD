@@ -1,0 +1,39 @@
+// buyer.proto
+
+syntax = "proto3";
+
+package buyer;
+
+service Buyer {
+  rpc SearchProducts(SearchProductsRequest) returns (SearchProductsResponse);
+  rpc PurchaseProduct(PurchaseProductRequest) returns (PurchaseProductResponse);
+}
+
+message SearchProductsRequest {
+  string query = 1;
+}
+
+message SearchProductsResponse {
+  repeated Product products = 1;
+
+  message Product {
+    string itemId = 1;
+    string productName = 2;
+    string category = 3;
+    int32 quantityRemaining = 4;
+    string description = 5;
+    string sellerAddress = 6;
+    float price = 7;
+    float rating = 8;
+  }
+}
+
+message PurchaseProductRequest {
+  string itemId = 1;
+  string buyerAddress = 2;
+  string buyerUuid = 3;
+}
+
+message PurchaseProductResponse {
+  bool success = 1;
+}
